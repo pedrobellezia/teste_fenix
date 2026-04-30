@@ -14,15 +14,13 @@ services:
     networks:
       - fenix-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
       interval: 10s
       timeout: 5s
       retries: 10
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: fenix-app:latest
     container_name: fenix-app
     restart: unless-stopped
     depends_on:
